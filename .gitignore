@@ -1,0 +1,7 @@
+node_modules
+dist
+.env.local
+.env
+logs.json
+.DS_Store
+api/index.ts
