@@ -27,12 +27,12 @@ async function readLogs() {
   return JSON.parse(data)
 }
 
-async function writeLogs(logs) {
+async function writeLogs(logs: any[]) {
   await initLogsFile()
   await fs.writeFile(LOGS_FILE, JSON.stringify(logs, null, 2), 'utf-8')
 }
 
-async function insertLog(log) {
+async function insertLog(log: any) {
   const newLog = {
     id: crypto.randomUUID(),
     timestamp: new Date().toISOString(),
@@ -48,20 +48,20 @@ async function insertLog(log) {
   return newLog.id
 }
 
-async function getLogs(params) {
-  let logs = await readLogs()
+async function getLogs(params: any) {
+  let logs: any[] = await readLogs()
 
   if (params.type) {
-    logs = logs.filter(log => log.type === params.type)
+    logs = logs.filter((log: any) => log.type === params.type)
   }
   if (params.playerName) {
-    logs = logs.filter(log => log.playerName?.toLowerCase().includes(params.playerName.toLowerCase()))
+    logs = logs.filter((log: any) => log.playerName?.toLowerCase().includes(params.playerName.toLowerCase()))
   }
   if (params.startDate) {
-    logs = logs.filter(log => new Date(log.timestamp) >= new Date(params.startDate))
+    logs = logs.filter((log: any) => new Date(log.timestamp) >= new Date(params.startDate))
   }
   if (params.endDate) {
-    logs = logs.filter(log => new Date(log.timestamp) <= new Date(params.endDate))
+    logs = logs.filter((log: any) => new Date(log.timestamp) <= new Date(params.endDate))
   }
 
   const total = logs.length
