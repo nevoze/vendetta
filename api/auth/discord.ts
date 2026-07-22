@@ -11,7 +11,7 @@ dotenv.config({ path: join(__dirname, '../../.env') })
 const DISCORD_CLIENT_ID = process.env.DISCORD_CLIENT_ID
 const DISCORD_REDIRECT_URI = process.env.DISCORD_REDIRECT_URI
 
-export default function handler(req: VercelRequest, res: VercelResponse) {
+export default function handler(_req: VercelRequest, res: VercelResponse) {
   const redirectUrl = `https://discord.com/api/oauth2/authorize?client_id=${DISCORD_CLIENT_ID}&redirect_uri=${encodeURIComponent(DISCORD_REDIRECT_URI as string)}&response_type=code&scope=identify%20guilds.members.read`
   res.redirect(redirectUrl)
 }
